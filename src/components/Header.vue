@@ -6,7 +6,7 @@
     </div>
   </header>
 </template>
-<style>
+<style scoped lang="scss">
 .button {
   @apply
   bg-blue-100
