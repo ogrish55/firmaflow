@@ -1,9 +1,9 @@
 <template>
-  <div>
-    <Header/>
+  <Header/>
+  <div class="mx-auto" style="max-width: 1280px;">
     <router-view class="pb-16"></router-view>
-    <Footer/>
   </div>
+  <Footer/>
 </template>
 
 <script setup lang="ts">

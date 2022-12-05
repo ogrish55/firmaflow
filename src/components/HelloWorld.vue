@@ -1,5 +1,7 @@
 <template>
-  <h1>{{ msg }}</h1>
+  <div class="break-words">
+    <h1>{{ msg }}</h1>
+  </div>
   <div class="card text-2xl">
     <button type="button" @click="count++">count is {{ count }}</button>
   </div>
