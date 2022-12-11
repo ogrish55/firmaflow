@@ -65,7 +65,7 @@ button:focus-visible {
   width: 100%;
   min-height: 100vh;
   text-align: center;
-  @apply relative;
+  @apply flex flex-col items-center;
 }
 
 @media (prefers-color-scheme: light) {

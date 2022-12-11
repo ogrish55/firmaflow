@@ -1,10 +1,9 @@
 <template>
   <div>
     <textarea
-      placeholder="Insert your feedback to the company here..."
       rows="6"
       cols="50"
-      class="p-4 resize-none"
+      class="p-4 resize-none border-none outline-none"
       :value="modelValue"
       @input="emit('update:modelValue', $event.target.value)"
     />
