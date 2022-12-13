@@ -1,86 +1,51 @@
 <template>
-		<TransitionGroup name="list" tag="div" class="max-w-lg mb-4 mx-auto" appear>
-			<div v-if="activeButtons.length">
-				<button
-					v-if="activeButtons.length"
-					v-for="type in activeButtons"
-					:key="type"
-					class="feedback-type"
-					:class="type.name"
-					@click="chooseFeedbackType(type)"
-				>
-					{{type.name}}
-				</button>
-			</div>
-			<div v-else>
-				<button
-					:class="activeButton.name"
-					class="feedback-type"
-					@click="chooseFeedbackType(activeButton)"
-				>
-					{{activeButton.name}}
-				</button>
-			</div>
-		</TransitionGroup>
+	<div class="mb-4 flex max-w-[500px] mx-auto justify-around">
+		<button
+			v-for="button in buttons"
+			:key="button"
+			class="feedback-type"
+			:class="[button.name, button.active ? 'active' : '']"
+			@click="chooseFeedbackType(button)"
+		>
+			{{button.name}}
+		</button>
+	</div>
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { ref } from 'vue'
 
-const buttonsArray = ref([
-	{
-		name: 'ris',
-		active: false
-	},
-	{
-		name: 'generelt',
-		active: false
-	},
-	{
-		name: 'ros',
-		active: false
-	}
+const buttons = ref([
+	{ name: 'ris', active: false },
+	{ name: 'generelt', active: true },
+	{ name: 'ros', active: false }
 ])
 
-const activeButtons = computed(() => {
-	return buttonsArray.value.some((button) => {
-		return button.active
-	}) ? [] : buttonsArray
-})
-
-const activeButton = computed(() => {
-	return buttonsArray.value.find((button) => {
-		return button.active
-	})
-})
-
 const chooseFeedbackType = (type: any) => {
-	type.active = !type.active;
+	buttons.value.forEach((button) => {
+		button.active = false;
+	})
+	type.active = true;
 }
 </script>
 
-<style lang="scss">
-.list-enter-active,
-.list-leave-active {
-	transition: all 0.5s ease;
-}
-.list-enter-from,
-.list-leave-to {
-	opacity: 0;
-}
+<style lang="scss" scoped>
 .feedback-type {
-	@apply min-w-[9rem] border rounded-md focus:outline-none;
+	@apply min-w-[9rem] rounded-md focus:outline-none border border-transparent;
 	&.ros {
-		@apply bg-green-800 hover:border-green-800;
+		@apply bg-green-800;
 	}
 	&.ris {
-		@apply bg-red-800 hover:border-red-800;
+		@apply bg-red-800;
 	}
 	&.generelt {
-		@apply bg-gray-600 hover:border-gray-600;
+		@apply bg-gray-600;
+	}
+	&:not(.active) {
+		@apply hover:border-transparent;
 	}
 	&.active {
-		@apply border-none;
+		@apply border-sky-200 hover:border-sky-200;
 	}
 }
 </style>
